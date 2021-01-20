@@ -7,6 +7,7 @@ var logger = require('morgan');
 const exphbs = require('express-handlebars')
 const PORT = 3000
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 
 var indexRouter = require('./routes/index');
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(methodOverride('_method'))
 
 app.use(session({
   secret: 'cart',
@@ -35,6 +37,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

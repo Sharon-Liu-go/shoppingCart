@@ -43,7 +43,31 @@ let cartController = {
           return res.redirect('back')
         })
       })
+  },
+  addCartItem: (req, res) => {
+    CartItem.findByPk(req.params.id).then(item => {
+      item.update({ quantity: item.quantity + 1 })
+    }).then(item => {
+      return res.redirect('back')
+    })
+  },
+
+  subCartItem: (req, res) => {
+    CartItem.findByPk(req.params.id).then(item => {
+      item.update({ quantity: item.quantity - 1 >= 1 ? item.quantity - 1 : 1 })
+    }).then(item => {
+      return res.redirect('back')
+    })
+  },
+
+  deleteCartItem: (req, res) => {
+    CartItem.findByPk(req.params.id).then(item => {
+      item.destroy()
+    }).then(item => {
+      return res.redirect('back')
+    })
   }
+
 }
 
 
