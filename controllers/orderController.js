@@ -1,5 +1,7 @@
 const db = require('../models')
 const { Cart, CartItem, Product, Order, OrderItem } = db
+const nodemailer = require('nodemailer');
+
 
 let orderController = {
   getOrders: (req, res) => {
@@ -38,7 +40,6 @@ let orderController = {
         return Promise.all(results).then(() =>
           res.redirect('/orders')
         );
-
       })
     })
   },
@@ -53,6 +54,22 @@ let orderController = {
         return res.redirect('back')
       })
     })
+  },
+  getPayment: (req, res) => {
+    console.log('===== getPayment =====')
+    console.log(req.params.id)
+    console.log('==========')
+
+    return Order.findByPk(req.params.id, {}).then(order => {
+      return res.render('payment', { order })
+    })
+  },
+  newebpayCallback: (req, res) => {
+    console.log('===== newebpayCallback =====')
+    console.log(req.body)
+    console.log('==========')
+
+    return res.redirect('back')
   }
 
 }
