@@ -4,7 +4,8 @@ const { Cart, CartItem, Product } = db
 
 let cartController = {
   getCart: (req, res) => {
-    return Cart.findByPk(req.session.cartId, { include: 'items' }).then(cart => {
+    const cartId = req.session.cartId
+    return Cart.findByPk(cartId, { include: 'items' }).then(cart => {
       cart = cart || { items: [] }
       cart = cart.items.map(items => ({
         ...items.dataValues,
@@ -14,7 +15,8 @@ let cartController = {
       let totalPrice = cart.length > 0 ? cart.map(d => d.price * d.quantity).reduce((a, b) => a + b) : 0
       return res.render('cart', {
         cart,
-        totalPrice
+        totalPrice,
+        cartId
       })
     })
   },

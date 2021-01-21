@@ -13,9 +13,9 @@ Order
       <tbody>
         {{#each this.items}}
         <tr>
-          <td>{{this.name}}</td>
-          <td>{{this.OrderItem.quantity}}</td>
-          <td>{{this.price}}</td>
+          <td>{{this.dataValues.name}}</td>
+          <td>{{this.OrderItem.dataValues.quantity}}</td>
+          <td>{{this.dataValues.price}}</td>
         </tr>
         {{/each}}
         <tr>
