@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Payment.init({
-    sn: DataTypes.STRING,
+    sn: DataTypes.BIGINT(50),
     amount: DataTypes.INTEGER,
     payment_method: DataTypes.STRING,
     paid_at: DataTypes.DATE,

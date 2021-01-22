@@ -3,7 +3,7 @@ const { Cart, CartItem, Product, Order, OrderItem } = db
 const nodemailer = require('nodemailer');
 const crypto = require("crypto")
 
-const URL = 'http://b1c0dc09359d.ngrok.io'
+const URL = 'http://f2ab5855094a.ngrok.io'
 const MerchantID = 'MS318058038'
 const HashKey = 'x4C7XNUFDuEQsBCcM8Pdgf2sO9pni1Ji'
 const HashIV = 'CJXd3i4Rvm2Fol3P'
@@ -187,8 +187,6 @@ let orderController = {
         return res.redirect('/orders')
       })
     })
-
-    return res.redirect('/orders')
   }
 
 }

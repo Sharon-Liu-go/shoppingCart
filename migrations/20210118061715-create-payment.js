@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       sn: {
-        type: Sequelize.STRING
+        type: Sequelize.BIGINT(50)
       },
       amount: {
         type: Sequelize.INTEGER
