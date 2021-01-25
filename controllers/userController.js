@@ -59,6 +59,33 @@ let userController = {
         res.redirect(`/selfProfile/${id}`)
       })
     })
+  },
+
+  resetPasswordPage: (req, res) => {
+    res.render('passwordSetting')
+  },
+
+  resetPassword: (req, res) => {
+    const id = req.params.id
+    const { oldPassword, newPassword, newPasswordConfirm } = req.body
+    User.findByPk(id, { attributes: ['id', 'password'] }).then(user => {
+      if (!bcrypt.compareSync(oldPassword, user.dataValues.password)) {
+        req.flash('error_message', 'Origin password is incorrect')
+        return res.redirect(`/passwordSetting/${id}`)
+      }
+
+      if (newPassword !== newPasswordConfirm) {
+        req.flash('error_message', 'new password and new password confirmation are different')
+        return res.redirect(`/passwordSetting/${id}`)
+      }
+
+      return user.update({
+        password: bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10), null)
+      }).then(user => {
+        req.flash('success_message', 'Successfully save change')
+        res.redirect(`/selfProfile/${id}`)
+      })
+    })
   }
 }
 

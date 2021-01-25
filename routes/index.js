@@ -37,6 +37,8 @@ router.get('/logout', userController.logout)
 
 router.get('/selfProfile/:id', authenticated, userController.getSelfProfile)
 router.post('/selfProfile/:id', authenticated, userController.editSelfProfile)
+router.get('/passwordSetting/:id', authenticated, userController.resetPasswordPage)
+router.post('/passwordSetting/:id', authenticated, userController.resetPassword)
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }))
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }))
