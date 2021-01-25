@@ -3,10 +3,6 @@ const { User } = db
 const bcrypt = require('bcryptjs')
 
 let userController = {
-  getLoginPage: (req, res) => {
-    res.render('login')
-  },
-
   getRegisterPage: (req, res) => {
     res.render('register')
   },
@@ -32,9 +28,17 @@ let userController = {
         })
       })
     }
+  },
 
+  getLoginPage: (req, res) => {
+    res.render('login')
+  },
 
+  login: (req, res) => {
+    req.flash('success_message', 'Successfully login')
+    return res.redirect('/')
   }
+
 
 }
 

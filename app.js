@@ -9,6 +9,7 @@ const PORT = 3000
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
+const passport = require('./config/passport')
 
 
 var indexRouter = require('./routes/index');
@@ -40,6 +41,8 @@ app.use(session({
 }));
 
 app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use((req, res, next) => {
   res.locals.success_message = req.flash('success_message')

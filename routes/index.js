@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const passport = require('../config/passport')
 
 const productController = require('../controllers/productController')
 const cartController = require('../controllers/cartController')
@@ -26,6 +27,7 @@ router.post('/order/:id/cancel', orderController.cancelOrder)
 router.get('/register', userController.getRegisterPage)
 router.post('/register', userController.register)
 router.get('/login', userController.getLoginPage)
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), userController.login)
 
 
 module.exports = router;
