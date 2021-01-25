@@ -1,21 +1,27 @@
 var createError = require('http-errors');
 var express = require('express');
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const session = require('express-session')
 var logger = require('morgan');
 const exphbs = require('express-handlebars')
-const PORT = 3000
+
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const passport = require('./config/passport')
 
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const PORT = 3000
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
