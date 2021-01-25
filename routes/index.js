@@ -24,6 +24,7 @@ router.post('/order', orderController.postOrder)
 router.post('/order/:id/cancel', orderController.cancelOrder)
 
 router.get('/register', userController.getRegisterPage)
+router.post('/register', userController.register)
 router.get('/login', userController.getLoginPage)
 
 

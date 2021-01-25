@@ -28,6 +28,15 @@
   </div>
 
   <div class="container-fluid">
+    {{#if success_message}}<div class="alert alert-success" role="alert">
+      {{success_message}}</div>
+    {{/if}}
+    {{#if error_message}}
+    <div class="alert alert-warning" role="alert">
+      {{error_message}}
+    </div>
+    {{/if}}
+
     {{{body}}}
   </div>
 
