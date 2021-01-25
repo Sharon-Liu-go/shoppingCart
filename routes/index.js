@@ -28,7 +28,7 @@ router.get('/register', userController.getRegisterPage)
 router.post('/register', userController.register)
 router.get('/login', userController.getLoginPage)
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), userController.login)
-
+router.get('/logout', userController.logout)
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }))
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }))

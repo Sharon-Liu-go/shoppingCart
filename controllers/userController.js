@@ -37,6 +37,12 @@ let userController = {
   login: (req, res) => {
     req.flash('success_message', 'Successfully login')
     return res.redirect('/')
+  },
+
+  logout: (req, res) => {
+    req.logout()
+    req.flash('success_message', 'Successfully logout')
+    return res.redirect('/')
   }
 
 
