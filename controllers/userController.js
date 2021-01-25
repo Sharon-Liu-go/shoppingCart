@@ -43,9 +43,23 @@ let userController = {
     req.logout()
     req.flash('success_message', 'Successfully logout')
     return res.redirect('/')
+  },
+
+  getSelfProfile: (req, res) => {
+    User.findByPk(req.params.id, { nest: true, raw: true }).then(user => {
+      res.render('selfProfile', { user })
+    })
+  },
+
+  editSelfProfile: (req, res) => {
+    const id = req.params.id
+    User.findByPk(id).then(user => {
+      user.update(req.body).then(user => {
+        req.flash('success_message', 'Successfully save change')
+        res.redirect(`/selfProfile/${id}`)
+      })
+    })
   }
-
-
 }
 
 module.exports = userController
