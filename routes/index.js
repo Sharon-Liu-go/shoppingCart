@@ -2,10 +2,14 @@ var express = require('express');
 var router = express.Router();
 const passport = require('../config/passport')
 
+const { authenticated } = require('../middleware/auth')
+
 const productController = require('../controllers/productController')
 const cartController = require('../controllers/cartController')
 const orderController = require('../controllers/orderController')
 const userController = require('../controllers/userController.js')
+
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -14,15 +18,15 @@ router.get('/', function (req, res, next) {
 
 router.get('/products', productController.getProducts)
 
-router.get('/cart', cartController.getCart)
-router.post('/cart', cartController.postCart)
-router.post('/cartItem/:id/add', cartController.addCartItem)
-router.post('/cartItem/:id/sub', cartController.subCartItem)
-router.delete('/cartItem/:id', cartController.deleteCartItem)
+router.get('/cart', authenticated, cartController.getCart)
+router.post('/cart', authenticated, cartController.postCart)
+router.post('/cartItem/:id/add', authenticated, cartController.addCartItem)
+router.post('/cartItem/:id/sub', authenticated, cartController.subCartItem)
+router.delete('/cartItem/:id', authenticated, cartController.deleteCartItem)
 
-router.get('/orders', orderController.getOrders)
-router.post('/order', orderController.postOrder)
-router.post('/order/:id/cancel', orderController.cancelOrder)
+router.get('/orders', authenticated, orderController.getOrders)
+router.post('/order', authenticated, orderController.postOrder)
+router.post('/order/:id/cancel', authenticated, orderController.cancelOrder)
 
 router.get('/register', userController.getRegisterPage)
 router.post('/register', userController.register)
