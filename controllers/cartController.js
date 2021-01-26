@@ -10,7 +10,8 @@ let cartController = {
       cart = cart.items.map(items => ({
         ...items.dataValues,
         itemId: items.CartItem.id,
-        quantity: items.CartItem.quantity
+        quantity: items.CartItem.quantity,
+        subtotal: items.price * items.CartItem.quantity
       }))
       let totalPrice = cart.length > 0 ? cart.map(d => d.price * d.quantity).reduce((a, b) => a + b) : 0
       return res.render('cart', {
