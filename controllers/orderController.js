@@ -106,6 +106,8 @@ let orderController = {
 
   postOrder: (req, res) => {
     const { name, phone, address, cartId, amount, shipping_status, payment_status } = req.body
+    console.log(`======`)
+    console.log(cartId)
     return Cart.findByPk(cartId, { include: 'items' }).then(cart => {
       return Order.create({
         name: name,
@@ -129,7 +131,7 @@ let orderController = {
         }
 
         return Promise.all(results).then(() =>
-          res.redirect('/orders')
+          res.redirect(`/order/${order.id}/payment`)
         );
       })
     })
