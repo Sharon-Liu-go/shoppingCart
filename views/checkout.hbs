@@ -1,0 +1,156 @@
+<container class="container-fluid" style="font-size:1.2em">
+
+  <div class="position-relative m-4 w-50 mx-auto">
+    <div class="progress" style="height: 1px;">
+      <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0"
+        aria-valuemax="100"></div>
+    </div>
+    <div class="step1">
+      <div class="position-absolute top-0 start-0 translate-middle btn-sm btn-success rounded-pill text-center"
+        style="width: 2rem; height:2rem;">1
+      </div>
+      <div class="mt-4 pt-2 position-absolute top-50 start-0 translate-middle">Shopping cart</div>
+    </div>
+    <div class="step2">
+      <div class="position-absolute top-0 start-50 translate-middle btn-sm btn-success rounded-pill text-center"
+        style="width: 2rem; height:2rem;">2
+      </div>
+      <div class="mt-4 pt-2 position-absolute top-50 start-50 translate-middle">Fill in information</div>
+    </div>
+    <div class="step3">
+      <div class="position-absolute top-0 start-100 translate-middle btn-sm btn-secondary rounded-pill text-center"
+        style="width: 2rem; height:2rem;">3
+      </div>
+      <div class="mt-4 pt-2 position-absolute top-50 start-100 translate-middle text-center" style="width: 150px;">
+        Confirm
+        order
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="accordion-item mt-5 bg-light">
+    <div class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+        aria-expanded="false" aria-controls="collapseTwo">
+        <div class="text-center">
+          <h3>Total：NT$ {{totalPrice}}</h3>
+          <strong>Shopping cart : [ {{cart.length}} item(s) ]</strong>
+        </div>
+    </div>
+    </button>
+  </div>
+  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+    data-bs-parent="#accordionExample">
+    <div class="accordion-body mx-auto p-5">
+      <table class="table">
+        <thead class="text-center">
+          <tr>
+            <th scope="col" class="text-start">Product description</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col" class="text-end">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody class=" text-center">
+          {{#each cart}}
+          <tr>
+            <td class="text-start">
+              <div style="display: flow-root;">
+                <img src="{{this.image}}" class="card-img" alt="..." style="height: 100px;width: auto;">
+                <span>{{this.name}}</span>
+              </div>
+            </td>
+            <td>
+              NT$ {{this.price}}
+            </td>
+            <td>
+              {{this.quantity}}
+            </td>
+            <td class="text-end">NT$ {{this.subtotal}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end">
+        <div style="width: 30em;">
+          <div class="d-flex justify-content-between mb-3 pe-2">
+            <div class="">Subtotal：</div>
+            <div class="">NT$ {{totalPrice}}</div>
+          </div>
+          <div class="d-flex justify-content-between mb-3 pe-2">
+            <div class="">Freight：</div>
+            <div class="">NT$ 0</div>
+          </div>
+          <div>
+            <hr style="height:1px">
+          </div>
+          <div class="d-flex justify-content-between pe-2">
+            <div class="">Total：</div>
+            <div class="">
+              <h2>NT$ {{totalPrice}}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-4 mx-auto p-5 bg-light ">
+    <form action="/payment" method="POST">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 p-3">
+          <div class="border-bottom border-success border-3 mb-3">
+            <h3>Customer information</h3>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label text-black-50">Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="sender" value="{{user.name}}">
+          </div>
+          <div class="mb-3">
+            <label for="staticEmail" class="form-label text-black-50">Email</label>
+            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.email}}">
+          </div>
+          <div class="mb-3">
+            <label for="staticPhone" class="form-label text-black-50">Phone</label>
+            <input type="text" readonly class="form-control-plaintext" id="staticPhone" value="{{user.phone}}">
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 bg-light  p-3">
+          <div class="border-bottom border-success border-3 mb-3">
+            <h3>Consignee information</h3>
+          </div>
+          <p class="text-black-50">Shipping method selected : Home delivery </p>
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label text-black-50">Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="consignee">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label text-black-50">Address</label>
+            <input type="text" class="form-control" id="exampleFormControlInput2" name="address">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput3" class="form-label text-black-50">Phone</label>
+            <input type="text" class="form-control" id="exampleFormControlInput3" name="phone">
+          </div>
+
+        </div>
+        <div class="col-sm-12 col-md-4  bg-light  p-3">
+          <div class="border-bottom border-success border-3 mb-3">
+            <h3>Payment information</h3>
+          </div>
+          <p class="text-black-50">Payment method selected : Credit card</p>
+          <div class="d-grid gap-2">
+            <input type="hidden" name="cartId" value="{{user.id}}">
+            <input type="hidden" name="cartId" value="{{cartId}}">
+            <input type="hidden" name="amount" value="{{totalPrice}}">
+            <input type="hidden" name="shipping_status" value="0">
+            <input type="hidden" name="payment_status" value="0">
+            <button class="btn btn-success" type="button" style="height: 3em; font-size:1.2em">Go to Pay</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</container>
