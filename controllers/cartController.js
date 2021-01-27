@@ -82,7 +82,10 @@ let cartController = {
         subtotal: items.price * items.CartItem.quantity
       }))
       let totalPrice = cart.length > 0 ? cart.map(d => d.price * d.quantity).reduce((a, b) => a + b) : 0
-      return res.render('checkout', {
+      if (totalPrice === 0) {
+        req.flash('error_message', 'The cart is empty')
+        return res.redirect('/cart')
+      } return res.render('checkout', {
         cart,
         totalPrice,
         cartId
