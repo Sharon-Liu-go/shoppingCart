@@ -106,8 +106,6 @@ let orderController = {
 
   postOrder: (req, res) => {
     const { name, phone, address, cartId, amount, shipping_status, payment_status } = req.body
-    console.log(`======`)
-    console.log(cartId)
     return Cart.findByPk(cartId, { include: 'items' }).then(cart => {
       return Order.create({
         name: name,
@@ -129,7 +127,6 @@ let orderController = {
             })
           );
         }
-
         return Promise.all(results).then(() =>
           res.redirect(`/order/${order.id}/payment`)
         );
@@ -153,11 +150,12 @@ let orderController = {
     console.log(req.params.id)
     console.log('==========')
 
-    return Order.findByPk(req.params.id, {}).then(order => {
+    return Order.findByPk(req.params.id, { include: 'items' }).then(order => {
       const tradeInfo = getTradeInfo(order.amount, '產品名稱', 'innovate72095@gmail.com')
       order.update({
         sn: tradeInfo.MerchantOrderNo,
       }).then(order => {
+        console.log(order)
         return res.render('payment', { order, tradeInfo })
       })
 
