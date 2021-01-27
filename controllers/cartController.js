@@ -69,6 +69,25 @@ let cartController = {
     }).then(item => {
       return res.redirect('back')
     })
+  },
+
+  checkout: (req, res) => {
+    const cartId = req.session.cartId
+    return Cart.findByPk(cartId, { include: 'items' }).then(cart => {
+      cart = cart || { items: [] }
+      cart = cart.items.map(items => ({
+        ...items.dataValues,
+        itemId: items.CartItem.id,
+        quantity: items.CartItem.quantity,
+        subtotal: items.price * items.CartItem.quantity
+      }))
+      let totalPrice = cart.length > 0 ? cart.map(d => d.price * d.quantity).reduce((a, b) => a + b) : 0
+      return res.render('checkout', {
+        cart,
+        totalPrice,
+        cartId
+      })
+    })
   }
 
 }

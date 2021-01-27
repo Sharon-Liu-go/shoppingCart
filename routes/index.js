@@ -24,6 +24,7 @@ router.post('/cart', authenticated, cartController.postCart)
 router.post('/cartItem/:id/add', authenticated, cartController.addCartItem)
 router.post('/cartItem/:id/sub', authenticated, cartController.subCartItem)
 router.delete('/cartItem/:id', authenticated, cartController.deleteCartItem)
+router.get('/checkout', authenticated, cartController.checkout)
 
 router.get('/orders', authenticated, orderController.getOrders)
 router.post('/order', authenticated, orderController.postOrder)
