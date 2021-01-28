@@ -14,7 +14,7 @@
       {{#each orders}}
       <tr>
         <td>{{this.sn}}</td>
-        <td>{{this.createdAt}}</td>
+        <td>{{date this.createdAt}}</td>
         <td>{{this.amount}}</td>
         <td>{{this.shipping_status}}</td>
         <td>{{this.payment_status}}</td>
