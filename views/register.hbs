@@ -1,29 +1,47 @@
-<h1>Register</h1>
+<div class="mt-5 mx-auto " style="max-width: 30%;">
+  <h1 class="text-center">Register</h1>
+  <p class="text-black-50">＊：required</p>
+  <div class="mb-3">
+    <form action='/register' method='POST'>
+      <div class="mb-3 border-bottom border-secondary bg-light">
+        <label for="inputName">Name <span class="text-black-50">*</span></label>
+        <input type="text" name="name" class="form-control form-control-lg border-0 bg-light" placeholder="" required
+          autofocus>
+      </div>
 
-<div class="">* : required </div>
+      <div class="mb-3 border-bottom border-secondary bg-light">
+        <label for="inputEmail">Email <span class="text-black-50">*</span></label>
+        <input type="text" name="email" class="form-control form-control-lg border-0 bg-light" placeholder="" required
+          autofocus>
+      </div>
 
-<form action='/register' method='POST'>
+      <div class="mb-3 border-bottom border-secondary bg-light">
+        <label for="inputPhone">Phone</label>
+        <input type="text" name="phone" class="form-control form-control-lg border-0 bg-light" placeholder="">
+      </div>
 
-  <label for="inputName">Name *</label>
+      <div class="mb-5">
+        <div class="border-bottom border-secondary bg-light">
+          <label for="inputPassword">Password <span class="text-black-50">*</span></label>
+          <input type="text" name="password" class="form-control form-control-lg border-0 bg-light" placeholder=""
+            required autofocus>
+        </div>
+        <p class="text-black-50">Passwords must be at least 6 characters in length.</p>
+      </div>
 
-  <input type="text" name="name" class="form-control" placeholder="" required autofocus>
+      <div class="mb-5 border-bottom border-secondary bg-light">
+        <label for="inputPasswordConfirm">Confirm Password <span class="text-black-50">*</span></label>
+        <input type="text" name="passwordConfirm" class="form-control form-control-lg border-0 bg-light" placeholder=""
+          required autofocus>
+      </div>
 
-  <label for="inputEmail">Email *</label>
+      <button type="submit" class="btn bg-success bg-gradient text-white w-100 p-2" style="font-size: 1.5em;">
+        Register</button>
+    </form>
+  </div>
 
-  <input type="text" name="email" class="form-control" placeholder="" required autofocus>
+  <div class="text-end" style="font-size: 1.5em">
+    <a href="/login" class="text-success">Login</a>
+  </div>
 
-  <label for="inputPasswordConfirm">phone</label>
-
-  <input type="text" name="phone" class="form-control" placeholder="">
-
-  <label for="inputPassword">Password *</label>
-
-  <input type="text" name="password" class="form-control" placeholder="" required autofocus>
-
-  <label for="inputPasswordConfirm">Confirm Password *</label>
-
-  <input type="text" name="passwordConfirm" class="form-control" placeholder="" required autofocus>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-
-</form>
+</div>
