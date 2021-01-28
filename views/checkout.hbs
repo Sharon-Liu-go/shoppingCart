@@ -118,7 +118,7 @@
           <div class="border-bottom border-success border-3 mb-3">
             <h3>Consignee information</h3>
           </div>
-          <p class="text-black-50">Shipping method selected : Home delivery </p>
+          <p class="text-black-50">Shipping method selected : {{shipMethod}}</p>
 
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label text-black-50">Name</label>
@@ -138,7 +138,7 @@
           <div class="border-bottom border-success border-3 mb-3">
             <h3>Payment information</h3>
           </div>
-          <p class="text-black-50">Payment method selected : Credit card</p>
+          <p class="text-black-50">Payment method selected : {{payMethod}}</p>
         </div>
       </div>
     </div>
@@ -152,6 +152,8 @@
             <input type="hidden" name="amount" value="{{totalPrice}}">
             <input type="hidden" name="shipping_status" value="0">
             <input type="hidden" name="payment_status" value="0">
+            <input type="hidden" name="shipping_method" value={{shipping_method_no}}>
+            <input type="hidden" name="payment_method" value={{payment_method_no}}>
             <button class="btn btn-success align-middle" type="submit" style="height: 3em; font-size:1.2em">Submit
               order</button>
           </div>

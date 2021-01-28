@@ -91,16 +91,16 @@
           </div>
           <div class="px-3">
             <label for="destination" class="form-label text-black-50">Shipping destination</label>
-            <select class="form-select" id="inputGroupSelect01">
-              <option selected style="font-size:1.2em">Taiwan</option>
+            <select class="form-select" id="inputGroupSelect01" name="destination" onchange="form.submit()">
+              <option selected style=" font-size:1.2em">Taiwan</option>
             </select>
             <label for="shipping-method" class="form-label mt-3 text-black-50">Shipping method</label>
-            <select class="form-select" id="inputGroupSelect01">
-              <option selected style="font-size:1.2em">Home delivery</option>
+            <select class="form-select" id="inputGroupSelect01" name="shipping_method_no" onchange="form.submit()">
+              <option selected style="font-size:1.2em" value="1">Home delivery</option>
             </select>
             <label for="payment-method" class="form-label mt-3 text-black-50">Payment method</label>
-            <select class="form-select" id="inputGroupSelect01">
-              <option selected style="font-size:1.2em">Credit card</option>
+            <select class="form-select" id="inputGroupSelect01" name="payment_method_no" onchange="form.submit()">
+              <option selected style="font-size:1.2em" value="1">Credit card</option>
             </select>
           </div>
         </div>

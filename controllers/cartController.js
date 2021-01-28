@@ -1,6 +1,17 @@
 const db = require('../models')
 const { Cart, CartItem, Product } = db
 
+function getShipMethod(shipping_method_no) {
+  switch (shipping_method_no) {
+    case '1': return 'Home delivery'
+  }
+}
+
+function getPayMethod(payment_method_no) {
+  switch (payment_method_no) {
+    case '1': return 'Credit card'
+  }
+}
 
 let cartController = {
   getCart: (req, res) => {
@@ -72,6 +83,9 @@ let cartController = {
   },
 
   checkout: (req, res) => {
+    const { shipping_method_no, payment_method_no } = req.query
+    let shipMethod = getShipMethod(shipping_method_no)
+    let payMethod = getPayMethod(payment_method_no)
     const cartId = req.session.cartId
     return Cart.findByPk(cartId, { include: 'items' }).then(cart => {
       cart = cart || { items: [] }
@@ -88,7 +102,11 @@ let cartController = {
       } return res.render('checkout', {
         cart,
         totalPrice,
-        cartId
+        cartId,
+        shipping_method_no,
+        shipMethod,
+        payment_method_no,
+        payMethod
       })
     })
   }
