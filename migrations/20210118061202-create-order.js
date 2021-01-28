@@ -26,10 +26,16 @@ module.exports = {
       shipping_status: {
         type: Sequelize.STRING
       },
+      shipping_method: {
+        type: Sequelize.STRING
+      },
       payment_method: {
         type: Sequelize.STRING
       },
       payment_status: {
+        type: Sequelize.STRING
+      },
+      sender: {
         type: Sequelize.STRING
       },
       UserId: {
