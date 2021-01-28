@@ -155,8 +155,13 @@ let orderController = {
       order.update({
         sn: tradeInfo.MerchantOrderNo,
       }).then(order => {
-        console.log(order)
-        return res.render('payment', { order, tradeInfo })
+        let orderItems = order.items.map(item => ({
+          ...item.dataValues,
+          price: item.OrderItem.price,
+          quantity: item.OrderItem.quantity,
+          subtotal: item.OrderItem.price * item.OrderItem.quantity
+        }))
+        return res.render('payment', { order, orderItems, tradeInfo })
       })
 
     })
