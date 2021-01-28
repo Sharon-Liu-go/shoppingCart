@@ -15,10 +15,31 @@
       <tr>
         <td>{{this.sn}}</td>
         <td>{{date this.createdAt}}</td>
-        <td>{{this.amount}}</td>
-        <td>{{this.shipping_status}}</td>
-        <td>{{this.payment_status}}</td>
-        <td><button type="button" class="btn btn-success bg-gradient">Details</button></td>
+        <td>NT$ {{this.amount}}</td>
+        {{#ifCond this.shipping_status '===' '-1' }}
+        <td>Cancelled</td>
+        {{/ifCond}}
+        {{#ifCond this.shipping_status '===' '0' }}
+        <td>Processing</td>
+        {{/ifCond}}
+        {{#ifCond this.shipping_status '===' '1' }}
+        <td>Dispatched</td>
+        {{/ifCond}}
+        {{#ifCond this.shipping_status '===' '2' }}
+        <td>Delivered</td>
+        {{/ifCond}}
+
+        {{#ifCond this.payment_status '===' '-1' }}
+        <td>Unpaid</td>
+        {{/ifCond}}
+        {{#ifCond this.payment_status '===' '0' }}
+        <td>Unpaid</td>
+        {{/ifCond}}
+        {{#ifCond this.payment_status '===' '1' }}
+        <td>Paid</td>
+        {{/ifCond}}
+        <td><a class="btn btn-success bg-gradient" href="/order/{{this.id}}" role="button">Details</a>
+        </td>
       </tr>
       {{/each}}
     </tbody>
