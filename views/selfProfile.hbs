@@ -1,28 +1,43 @@
-<h1>Profile</h1>
+<div class="mt-5 mx-auto " style="max-width: 30%;">
+  <h1 class="text-center mb-5"><i class="fas fa-user-edit"></i> Edit personal profile</h1>
+  <p class="text-black-50">＊：required</p>
 
-<div class="">* : required </div>
+  <form action='/selfProfile/{{user.id}}' method='POST'>
 
-<form action='/selfProfile/{{user.id}}' method='POST'>
+    <div class="mb-3 row">
+      <label for="inputName" class="col-sm-2 col-form-label">Name <span class="text-black-50">*</span></label>
+      <div class="col-sm-10">
+        <input type="text" name="name" class="form-control" id="inputName" placeholder="" value={{user.name}} required
+          autofocus>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputEmail" class="col-sm-2 col-form-label">Email <span class="text-black-50">*</span></label>
+      <div class="col-sm-10">
+        <input type="text" name="email" class="form-control" id="inputEmail" placeholder="" value={{user.email}}
+          required autofocus>
+      </div>
+    </div>
 
-  <label for="inputName">Name *</label>
+    <div class="mb-3 row">
+      <label for="inputPhone" class="col-sm-2 col-form-label">Phone </label>
+      <div class="col-sm-10">
+        <input type="text" name="phone" class="form-control" id="inputPhone" placeholder="" value={{user.phone}}
+          required autofocus>
+      </div>
+    </div>
 
-  <input type="text" name="name" class="form-control" placeholder="" value={{user.name}} required autofocus>
+    <div class="mb-3 row">
+      <label for="setNewPassword" class="col-sm-2 col-form-label">Password<span class="text-black-50">*</span></label>
+      <div class="col-sm-10 d-flex align-items-center">
+        <a href="/passwordSetting/{{user.id}}" class="text-success">set new password</a>
+      </div>
+    </div>
 
-  <label for="inputEmail">Email *</label>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+  </form>
 
-  <input type="text" name="email" class="form-control" placeholder="" value={{user.email}} required autofocus>
-
-  <label for="inputPasswordConfirm">phone</label>
-
-  <input type="text" name="phone" class="form-control" placeholder="" value={{user.phone}}>
-
-  <label for="inputPassword">Password *</label>
-
-  <a href="/passwordSetting/{{user.id}}">set new password</a>
-
-  <button type="submit" class="btn btn-primary">Save change</button>
-
-</form>
-<form action='/selfProfile/{{user.id}}'>
-  <button type="submit" class="btn btn-primary">Cancel</button>
-</form>
+  <form action='/selfProfile/{{user.id}}'>
+    <button type="submit" class="btn btn-primary">Cancel</button>
+  </form>
+</div>
