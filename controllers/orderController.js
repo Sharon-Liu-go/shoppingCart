@@ -12,6 +12,13 @@ const ReturnURL = URL + "/newebpay/callback?from=ReturnURL"
 const NotifyURL = URL + "/newebpay/callback?from=NotifyURL"
 const ClientBackURL = URL + "/orders"
 
+//取得付款方式的參數
+function getPayMethod(method) {
+  switch (method) {
+    case '1': return 'CREDIT'
+  }
+}
+
 function genDataChain(TradeInfo) {
   let results = [];
   for (let kv of Object.entries(TradeInfo)) {
@@ -44,10 +51,10 @@ function create_mpg_sha_encrypt(TradeInfo) {
   return sha.update(plainText).digest("hex").toUpperCase();
 }
 
-function getTradeInfo(Amt, Desc, email) {
+function getTradeInfo(Amt, Desc, email, paymentMethod) {
 
   console.log('===== getTradeInfo =====')
-  console.log(Amt, Desc, email)
+  console.log(Amt, Desc, email, paymentMethod)
   console.log('==========')
 
   data = {
@@ -65,6 +72,9 @@ function getTradeInfo(Amt, Desc, email) {
     'NotifyURL': NotifyURL, // 支付通知網址/每期授權結果通知
     'ClientBackURL': ClientBackURL, // 支付取消返回商店網址
   }
+  //加入paymentMethod的參數，啟用:1
+
+  data[paymentMethod] = 1
 
   console.log('===== getTradeInfo: data =====')
   console.log(data)
@@ -105,7 +115,7 @@ let orderController = {
   },
 
   postOrder: (req, res) => {
-    const { name, phone, address, cartId, amount, shipping_status, payment_status } = req.body
+    const { name, phone, address, cartId, amount, shipping_status, payment_status, shipping_method, payment_method } = req.body
     return Cart.findByPk(cartId, { include: 'items' }).then(cart => {
       return Order.create({
         name: name,
@@ -114,6 +124,9 @@ let orderController = {
         shipping_status: shipping_status,
         payment_status: payment_status,
         amount: amount,
+        shipping_method: shipping_method,
+        payment_method: payment_method,
+        UserId: req.user.id
       }).then(order => {
 
         let results = [];
@@ -127,8 +140,11 @@ let orderController = {
             })
           );
         }
-        return Promise.all(results).then(() =>
+        return Promise.all(results).then(() => {
+          console.log('-----------------')
+          console.log(order)
           res.redirect(`/order/${order.id}/payment`)
+        }
         );
       })
     })
@@ -151,7 +167,9 @@ let orderController = {
     console.log('==========')
 
     return Order.findByPk(req.params.id, { include: 'items' }).then(order => {
-      const tradeInfo = getTradeInfo(order.amount, '產品名稱', 'innovate72095@gmail.com')
+      let paymentMethod = getPayMethod(order.dataValues.payment_method)
+
+      const tradeInfo = getTradeInfo(order.amount, '產品名稱', 'innovate72095@gmail.com', paymentMethod)
       order.update({
         sn: tradeInfo.MerchantOrderNo,
       }).then(order => {
