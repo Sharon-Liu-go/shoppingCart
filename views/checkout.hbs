@@ -32,7 +32,7 @@
     <div class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
         aria-expanded="false" aria-controls="collapseTwo">
-        <div class="text-center">
+        <div class="px-4">
           <h3>Total：NT$ {{totalPrice}}</h3>
           <strong>Shopping cart : [ {{cart.length}} item(s) ]</strong>
         </div>
@@ -94,9 +94,8 @@
       </div>
     </div>
   </div>
-
-  <div class="m-4 mx-auto p-5 bg-light ">
-    <form action="/payment" method="POST">
+  <form action="/order" method="POST">
+    <div class="m-4 mx-auto p-5 bg-light position-relative ">
       <div class="row">
         <div class="col-sm-12 col-md-4 p-3">
           <div class="border-bottom border-success border-3 mb-3">
@@ -123,7 +122,7 @@
 
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label text-black-50">Name</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="consignee">
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="name">
           </div>
           <div class="mb-3">
             <label for="exampleFormControlInput2" class="form-label text-black-50">Address</label>
@@ -140,17 +139,32 @@
             <h3>Payment information</h3>
           </div>
           <p class="text-black-50">Payment method selected : Credit card</p>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto px-5 bg-light ">
+      <div class="row">
+        <div class="col-sm-12 col-md-8 p-3"></div>
+        <div class="col-sm-12 col-md-4  bg-light  p-3 ">
           <div class="d-grid gap-2">
-            <input type="hidden" name="cartId" value="{{user.id}}">
+            <input type="hidden" name="userId" value="{{user.id}}">
             <input type="hidden" name="cartId" value="{{cartId}}">
             <input type="hidden" name="amount" value="{{totalPrice}}">
             <input type="hidden" name="shipping_status" value="0">
             <input type="hidden" name="payment_status" value="0">
-            <button class="btn btn-success" type="button" style="height: 3em; font-size:1.2em">Go to Pay</button>
+            <button class="btn btn-success align-middle" type="submit" style="height: 3em; font-size:1.2em">Submit
+              order</button>
           </div>
         </div>
       </div>
-    </form>
-  </div>
-
+    </div>
+  </form>
+  <div class="row px-5">
+    <div class=" position-absolute col-sm-12 col-md-8 p-3" style=>
+      <a href="/cart">
+        <button class="btn align-middle text-success" type="link" style="height: 3em; font-size:1.2em">&lt;&lt;
+          Back to shopping cart
+        </button>
+      </a>
+    </div>
 </container>
