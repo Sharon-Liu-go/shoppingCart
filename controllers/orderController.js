@@ -112,6 +112,20 @@ let orderController = {
         return res.redirect('/orders')
       })
     })
+  },
+
+  getOrder: (req, res) => {
+
+    Order.findByPk(req.params.id, { include: 'items' }).then(order => {
+      let orderItems = order.items.map(item => ({
+        ...item.dataValues,
+        price: item.OrderItem.price,
+        quantity: item.OrderItem.quantity,
+        subtotal: item.OrderItem.price * item.OrderItem.quantity
+
+      }))
+      return res.render('orderDetails', { order, orderItems })
+    })
   }
 
 }

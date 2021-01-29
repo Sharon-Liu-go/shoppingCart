@@ -31,6 +31,7 @@ router.post('/order', authenticated, orderController.postOrder)
 router.post('/order/:id/cancel', authenticated, orderController.cancelOrder)
 router.get('/order/:id/payment', orderController.getPayment)
 router.post('/newebpay/callback', orderController.newebpayCallback)
+router.get('/order/:id', authenticated, orderController.getOrder)
 
 router.get('/register', userController.getRegisterPage)
 router.post('/register', userController.register)
