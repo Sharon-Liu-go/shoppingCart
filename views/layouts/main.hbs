@@ -16,19 +16,58 @@
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm px-3 pe-5" style=" font-size:1.2em">
+    <div class=" container-fluid d-flex justify-content-between">
+      <div class="">
+        <a class="navbar-brand" href="/">SL Shop</a>
+      </div>
+      <div class="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="d-flex bg-white border rounded-pill">
+            <input class="form-control me-2 border-0 rounded-pill" type="search" placeholder="Search"
+              aria-label="Search">
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+          </form>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+            {{#if user}}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="far fa-user-circle"></i> {{user.name}}
+              </a>
+              <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/selfProfile/{{user.id}}">Profile</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/orders">Orders</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class=" dropdown-item" href="/logout">Logout</a></li>
+              </ul>
+            </li>
+            {{else}}
+            <li class="nav-item d-flex align-items-center">
+              <a class="nav-link" href="/login">Login</a> |
+              <a class="nav-link" href="/register">Register</a>
+            </li>
+            {{/if}}
+            <li class="nav-item ms-3">
+              <a class="nav-link" href="/cart"><i class="fas fa-shopping-cart"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">
-      <a href="/products">SL Shop</a>
-    </h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="/cart">Cart</a>
-      <a class="p-2 text-dark" href="/orders">Orders</a>
-      <a class="p-2 text-dark" href="/checkout">checkout</a>
-    </nav>
-  </div>
+    </div>
+  </nav>
 
-  <div class="container-fluid">
+  <div class=" container-fluid">
     {{#if success_message}}
     <div class="alert alert-success alert-dismissible fade show fs-5 text" role="alert">
       {{success_message}}
