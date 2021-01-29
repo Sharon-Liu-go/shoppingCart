@@ -13,11 +13,11 @@ const auth = require('../middleware/auth');
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function (req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
-router.get('/products', productController.getProducts)
+router.get('/', productController.getProducts)
 
 router.get('/cart', authenticated, cartController.getCart)
 router.post('/cart', authenticated, cartController.postCart)
