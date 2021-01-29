@@ -68,4 +68,29 @@
     </div>
   </div>
 
+  {{!-- 分頁 --}}
+  <div class="pagination d-flex justify-content-center mt-5 px-5">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="/?page={{prev}}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        {{#each pagesArray}}
+        {{#ifCond this "===" ../pageNow}}
+        <li class="page-item active"><a class="page-link" href="/?page={{this}}">{{this}}</a></li>
+        {{else}}
+        <li class="page-item"><a class="page-link" href="/?page={{this}}">{{this}}</a></li>
+        {{/ifCond}}
+        {{/each}}
+        <li class="page-item">
+          <a class="page-link" href="/?page={{next}}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
 </container>
