@@ -16,28 +16,8 @@
         <td>{{this.sn}}</td>
         <td>{{date this.createdAt}}</td>
         <td>NT$ {{this.amount}}</td>
-        {{#ifCond this.shipping_status '===' '-1' }}
-        <td>Cancelled</td>
-        {{/ifCond}}
-        {{#ifCond this.shipping_status '===' '0' }}
-        <td>Processing</td>
-        {{/ifCond}}
-        {{#ifCond this.shipping_status '===' '1' }}
-        <td>Dispatched</td>
-        {{/ifCond}}
-        {{#ifCond this.shipping_status '===' '2' }}
-        <td>Delivered</td>
-        {{/ifCond}}
-
-        {{#ifCond this.payment_status '===' '-1' }}
-        <td>Unpaid</td>
-        {{/ifCond}}
-        {{#ifCond this.payment_status '===' '0' }}
-        <td>Unpaid</td>
-        {{/ifCond}}
-        {{#ifCond this.payment_status '===' '1' }}
-        <td>Paid</td>
-        {{/ifCond}}
+        <td>{{getShippingStatus this.shipping_status}}</td>
+        <td>{{getPayStatus this.payment_status}}</td>
         <td><a class="btn btn-success bg-gradient" href="/order/{{this.id}}" role="button">Details</a>
         </td>
       </tr>

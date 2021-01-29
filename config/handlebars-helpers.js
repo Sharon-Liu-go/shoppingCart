@@ -30,5 +30,22 @@ module.exports = {
 
   date: function (a) {
     return moment(a).format().slice(0, 10);
+  },
+
+  getShippingStatus(shipping_status_no) {
+    switch (shipping_status_no) {
+      case '-1': return 'Cancelled'
+      case '0': return 'Processing'
+      case '1': return 'Dispatched'
+      case '2': return 'Delivered'
+    }
+  },
+
+  getPayStatus(payment_status_no) {
+    switch (payment_status_no) {
+      case '-1': return 'Cancelled'
+      case '0': return 'Unpaid'
+      case '1': return 'Paid'
+    }
   }
 }
