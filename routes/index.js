@@ -10,17 +10,10 @@ const orderController = require('../controllers/orderController')
 const userController = require('../controllers/userController.js');
 const auth = require('../middleware/auth');
 
-
-
-/* GET home page. */
-// router.get('/', function (req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-
 router.get('/', productController.getProducts)
 
 router.get('/cart', authenticated, cartController.getCart)
-router.post('/cart', authenticated, cartController.postCart)
+router.post('/cart', cartController.postCart)
 router.post('/cartItem/:id/add', authenticated, cartController.addCartItem)
 router.post('/cartItem/:id/sub', authenticated, cartController.subCartItem)
 router.delete('/cartItem/:id', authenticated, cartController.deleteCartItem)
