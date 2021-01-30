@@ -1,6 +1,6 @@
 const crypto = require("crypto")
 
-const URL = 'http://f2ab5855094a.ngrok.io'
+const URL = 'http://ad8f09570a9a.ngrok.io'
 const MerchantID = 'MS318058038'
 const HashKey = 'x4C7XNUFDuEQsBCcM8Pdgf2sO9pni1Ji'
 const HashIV = 'CJXd3i4Rvm2Fol3P'
@@ -102,7 +102,7 @@ function getTradeInfo(Amt, Desc, email, paymentMethod) {
 module.exports = {
   getPayParam,
   genDataChain,
-  create_mpg_aes_encrypt,
+  create_mpg_aes_decrypt,
   create_mpg_sha_encrypt,
   getTradeInfo
 }
