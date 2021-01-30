@@ -46,9 +46,16 @@ let orderController = {
           );
         }
         return Promise.all(results).then(() => {
-          console.log('-----------------')
-          console.log(order)
-          res.redirect(`/order/${order.id}/payment`)
+          //清空購物車
+          CartItem.findAll({
+            where: {
+              cartId: cartId
+            }
+          }).then(items => {
+            items.map(item => item.destroy())
+            req.session.cartItemCount = 0  //購物車的品項也歸0
+            res.redirect(`/order/${order.id}/payment`)
+          })
         }
         );
       })
