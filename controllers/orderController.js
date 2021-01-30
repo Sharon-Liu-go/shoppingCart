@@ -20,7 +20,7 @@ let orderController = {
   },
 
   postOrder: (req, res) => {
-    const { name, phone, address, cartId, amount, shipping_status, payment_status, shipping_method, payment_method } = req.body
+    const { name, phone, address, cartId, amount, shipping_status, payment_status, shipping_method, payment_method, sender } = req.body
     return Cart.findByPk(cartId, { include: 'items' }).then(cart => {
       return Order.create({
         name: name,
@@ -31,7 +31,8 @@ let orderController = {
         amount: amount,
         shipping_method: shipping_method,
         payment_method: payment_method,
-        UserId: req.user.id
+        UserId: req.user.id,
+        sender: sender
       }).then(order => {
 
         let results = [];
