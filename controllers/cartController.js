@@ -74,6 +74,7 @@ let cartController = {
     CartItem.findByPk(req.params.id).then(item => {
       item.destroy()
     }).then(item => {
+      req.session.cartItemCount = req.session.cartItemCount - 1
       return res.redirect('back')
     })
   },
