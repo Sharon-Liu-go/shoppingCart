@@ -33,6 +33,9 @@
       <h3>Shopping cart [ {{cart.length}} item(s) ]</h3>
     </div>
     <table class="table">
+      {{#ifCond cart.length '===' 0}}
+      <h5 class="text-black-50 p-4 text-center font-monospace">Your cart is empty, go shopping now!</h5>
+      {{else}}
       <thead>
         <tr>
           <th scope="col">Product description</th>
@@ -77,8 +80,8 @@
           </td>
         </tr>
         {{/each}}
-
       </tbody>
+      {{/ifCond}}
     </table>
 
   </div>
