@@ -1,14 +1,17 @@
 const db = require('../models')
 const { Cart, CartItem, Product, Order, OrderItem } = db
 const nodemailer = require('nodemailer');
-const newebpay_helpers = require('../config/newebpay-helpers')
+const newebpay_helpers = require('../config/newebpay-helpers');
+const user = require('../models/user');
 
 
 
 
 let orderController = {
   getOrders: (req, res) => {
-    Order.findAll({ include: 'items' }).then(orders => {
+    Order.findAll({ where: { UserId: req.user.id }, include: 'items' }).then(orders => {
+      console.log('=======')
+      console.log(orders)
       orders = orders.map(items => ({
         ...items.dataValues
       }))
