@@ -4,6 +4,7 @@ const helpers = require('../_helpers')
 
 
 let cartController = {
+
   getCart: (req, res) => {
     const cartId = req.session.cartId
     return Cart.findByPk(cartId, { include: 'items' }).then(cart => {
@@ -43,8 +44,13 @@ let cartController = {
     })
       .then((cartItem) => {
         req.session.cartId = cart.id
-        return req.session.save(() => {
-          return res.redirect('back')
+
+        //出有多少cart中的有幾個items，並存在session裡：
+        Cart.findByPk(cart.id, { include: 'items' }).then(cart => {
+          req.session.cartItemCount = cart.items.length
+          return req.session.save(() => {
+            return res.redirect('back')
+          })
         })
       })
   },

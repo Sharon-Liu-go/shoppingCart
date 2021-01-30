@@ -16,10 +16,10 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm px-3 pe-5" style=" font-size:1.2em">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm p-3" style=" font-size:1.2em">
     <div class=" container-fluid d-flex justify-content-between">
       <div class="">
-        <a class="navbar-brand" href="/">SL Shop</a>
+        <a class="navbar-brand fs-2 text fw-bold text-success" href="/"><i class="fas fa-seedling"></i> SL Shop</a>
       </div>
       <div class="">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -28,16 +28,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="d-flex bg-white border rounded-pill">
-            <input class="form-control me-2 border-0 rounded-pill" type="search" placeholder="Search"
+            <input class="form-control me-2 border-0 rounded-pill" type="search" placeholder="Search product"
               aria-label="Search">
             <button class="btn" type="submit"><i class="fas fa-search"></i></button>
           </form>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
             {{#if user}}
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <i class="far fa-user-circle"></i> {{user.name}}
+              <a class="nav-link dropdown-toggle fs-4 text" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="far fa-user-circle" style=" font-size:1.2em"></i> {{user.name}}
               </a>
               <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/selfProfile/{{user.id}}">Profile</a></li>
@@ -58,12 +58,19 @@
             </li>
             {{/if}}
             <li class="nav-item ms-3">
-              <a class="nav-link" href="/cart"><i class="fas fa-shopping-cart"></i></a>
+              <a class="nav-link fs-4 text " href="/cart"><i class="fas fa-shopping-cart position-relative"
+                  style="font-size:1.2em">
+                  {{#if cartItemCount }}
+                  <span class="position-absolute top-0 start-100 translate-middle badge  bg-danger 
+                    {{#ifCond cartItemCount '<' 20}} rounded-circle {{else}} rounded-pill{{/ifCond}}"
+                    style=" font-size:0.5em" id='cartItemsCount'>
+                    {{countLimit cartItemCount}}
+                    {{/if}}
+                </i></a>
             </li>
           </ul>
         </div>
       </div>
-
     </div>
   </nav>
 
@@ -85,10 +92,10 @@
   </div>
 
 
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
+
 </body>
 
 </html>

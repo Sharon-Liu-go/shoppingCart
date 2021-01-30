@@ -47,5 +47,11 @@ module.exports = {
       case '0': return 'Unpaid'
       case '1': return 'Paid'
     }
+  },
+
+  countLimit(a) {
+    if (a >= 20) {
+      return `20+`
+    } return a
   }
 }
