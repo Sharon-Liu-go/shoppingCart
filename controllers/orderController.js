@@ -9,7 +9,7 @@ const user = require('../models/user');
 
 let orderController = {
   getOrders: (req, res) => {
-    Order.findAll({ where: { UserId: req.user.id }, include: 'items' }).then(orders => {
+    Order.findAll({ where: { UserId: req.user.id }, include: 'items', order: [['createdAt', 'DESC']] }).then(orders => {
       console.log('=======')
       console.log(orders)
       orders = orders.map(items => ({
