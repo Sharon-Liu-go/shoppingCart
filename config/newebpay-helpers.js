@@ -1,6 +1,6 @@
 const crypto = require("crypto")
 
-const URL = 'http://ad8f09570a9a.ngrok.io'
+const URL = 'http://f8f82c9ea6ec.ngrok.io'
 const MerchantID = 'MS318058038'
 const HashKey = 'x4C7XNUFDuEQsBCcM8Pdgf2sO9pni1Ji'
 const HashIV = 'CJXd3i4Rvm2Fol3P'
