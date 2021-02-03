@@ -139,13 +139,11 @@ let orderController = {
     })
   },
 
-  clientBack: async (req, res) => {
-    let order = await Order.findByPk({ where: { sn: req.params.sn }, attributes: ['payment_status', 'updatedAt'] })
-    return res.render('clientBack', order)
+  clientBack: (req, res) => {
+    Order.findByPk({ where: { sn: req.params.sn }, attributes: ['payment_status', 'updatedAt'] })
+      .then(order => { return res.render('clientBack', order) })
+
   }
-
-
-
 }
 
 module.exports = orderController
