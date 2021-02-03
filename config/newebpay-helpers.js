@@ -1,6 +1,6 @@
 const crypto = require("crypto")
 
-const URL = process.env.NEWEBPAY_URL
+const URL = process.env.NEWEBPAY_URL || "/"
 const MerchantID = 'MS318058038'
 const HashKey = 'x4C7XNUFDuEQsBCcM8Pdgf2sO9pni1Ji'
 const HashIV = 'CJXd3i4Rvm2Fol3P'
