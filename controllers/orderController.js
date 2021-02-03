@@ -142,6 +142,7 @@ let orderController = {
   clientBack: (req, res) => {
     Order.findByPk({ where: { sn: req.params.sn }, attributes: ['payment_status', 'updatedAt'] })
       .then(order => { return res.render('clientBack', order) })
+      .catch(err => console.log(err))
 
   }
 }
