@@ -1,13 +1,13 @@
 const crypto = require("crypto")
 
-const URL = process.env.NEWEBPAY_URL || "/"
+const URL = process.env.NEWEBPAY_URL
 const MerchantID = 'MS318058038'
 const HashKey = 'x4C7XNUFDuEQsBCcM8Pdgf2sO9pni1Ji'
 const HashIV = 'CJXd3i4Rvm2Fol3P'
 const PayGateWay = "https://ccore.newebpay.com/MPG/mpg_gateway"
 const ReturnURL = URL + "/newebpay/callback?from=ReturnURL"
 const NotifyURL = URL + "/newebpay/callback?from=NotifyURL"
-const ClientBackURL = URL + "/orders"
+const ClientBackURL = URL + "/clientBack"
 
 //取得付款方式的參數
 function getPayParam(method) {
@@ -67,7 +67,7 @@ function getTradeInfo(Amt, Desc, email, paymentMethod) {
     'Email': email, // 付款人電子信箱
     'ReturnURL': ReturnURL, // 支付完成返回商店網址
     'NotifyURL': NotifyURL, // 支付通知網址/每期授權結果通知
-    'ClientBackURL': ClientBackURL, // 支付取消返回商店網址
+    'ClientBackURL': `${ClientBackURL}/${Date.now()}`, // 支付取消返回商店網址
   }
   //加入paymentMethod的參數，啟用:1
 

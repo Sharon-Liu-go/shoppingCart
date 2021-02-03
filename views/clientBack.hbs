@@ -1,0 +1,23 @@
+<div class="col-3 mt-5 mx-auto">
+
+  訂單的付款狀態
+  訂單的更新時間
+  Order.findByPk({ where: { sn: req.params.sn }, attributes: ['payment_status', 'updatedAt'] })
+
+  {{#ifCond order.payment_status '===' 0}}
+  You have not paid yet, back to payment.
+
+  Go to check your order status.
+
+  Note: the order will be cancelled if the payment is not finished within 24 hours, please arrange your payment by
+  {{time updatedAt }}
+  {{/ifCond}}
+
+  {{#ifCond order.payment_status '===' 1}}
+  Thank you. Your order is successfully
+
+  Go to check your order.
+
+  Go forward shopping area.
+  {{/ifCond}}
+</div>

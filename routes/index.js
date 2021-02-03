@@ -40,5 +40,7 @@ router.post('/passwordSetting/:id', authenticated, userController.resetPassword)
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }))
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }))
 
+//clientBackURL
+router.get('/clientBack/:sn', authenticated, orderController.clientBack)
 
 module.exports = router;

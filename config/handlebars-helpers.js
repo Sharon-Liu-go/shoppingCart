@@ -32,6 +32,10 @@ module.exports = {
     return moment(a).format().slice(0, 10);
   },
 
+  time: function (a) {
+    return moment(a).format("h:mm A , MMMM Do YYYY ")
+  },
+
   getShippingStatus(shipping_status_no) {
     switch (shipping_status_no) {
       case '-1': return 'Cancelled'
