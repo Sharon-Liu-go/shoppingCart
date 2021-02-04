@@ -1,23 +1,28 @@
-<div class="col-3 mt-5 mx-auto">
+<div class="col-sm-3 col-md-4 mt-5 mx-auto">
 
-  訂單的付款狀態
-  訂單的更新時間
-  Order.findByPk({ where: { sn: req.params.sn }, attributes: ['payment_status', 'updatedAt'] })
+  {{#ifCond order.dataValues.payment_status '===' '0'}}
+  <p class="fs-3 text"> You have not paid yet, back to payment.</p>
 
-  {{#ifCond order.payment_status '===' 0}}
-  You have not paid yet, back to payment.
+  <a href="/orders">
+    <p class="fs-3 text"> Go to check your order status.</p>
+  </a>
 
-  Go to check your order status.
+  <p class="fs-3 text">Note: the order will be cancelled if the payment is not finished within 24 hours, please arrange
+    your payment by
+    <span class="text-danger">{{time order.dataValues.updatedAt }}</span>
+  </p>
 
-  Note: the order will be cancelled if the payment is not finished within 24 hours, please arrange your payment by
-  {{time updatedAt }}
   {{/ifCond}}
 
-  {{#ifCond order.payment_status '===' 1}}
-  Thank you. Your order is successfully
+  {{#ifCond order.dataValues.payment_status '===' '1'}}
 
-  Go to check your order.
+  <p class="fs-3 text">Thank you. Your payment is successfully done.</p>
+  <a href="/orders">
+    <p class="fs-3 text">Go to check your order.</p>
+  </a>
+  <a href="/">
+    <p class="fs-3 text">Go forward shopping area.</p>
+  </a>
 
-  Go forward shopping area.
   {{/ifCond}}
 </div>

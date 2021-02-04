@@ -41,6 +41,6 @@ router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }))
 
 //clientBackURL
-router.get('/clientBack/:sn', authenticated, orderController.clientBack)
+router.get('/clientBack/:sn', orderController.clientBack)
 
 module.exports = router;

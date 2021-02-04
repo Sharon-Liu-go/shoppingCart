@@ -141,7 +141,9 @@ let orderController = {
 
   clientBack: (req, res) => {
     Order.findOne({ where: { sn: req.params.sn }, attributes: ['payment_status', 'updatedAt'] })
-      .then(order => { return res.render('clientBack', order) })
+      .then(order => {
+        return res.render('clientBack', { order })
+      })
       .catch(err => console.log(err))
 
   }

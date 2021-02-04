@@ -33,6 +33,8 @@ module.exports = {
   },
 
   time: function (a) {
+    let a_s = a.getTime()
+    a.setTime(a_s + 1000 * 60 * 60 * 24);//設定新時間比舊時間多一天
     return moment(a).format("h:mm A , MMMM Do YYYY ")
   },
 
