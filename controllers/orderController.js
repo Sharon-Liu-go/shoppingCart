@@ -82,9 +82,11 @@ let orderController = {
     return Order.findByPk(req.params.id, { include: 'items' }).then(order => {
       let paymentMethod = newebpay_helpers.getPayParam(order.dataValues.payment_method)
 
-      const tradeInfo = newebpay_helpers.getTradeInfo(order.amount, '產品名稱', 'innovate72095@gmail.com', paymentMethod)
+      let orderSn = order.sn
+      const tradeInfo = newebpay_helpers.getTradeInfo(order.amount, '產品名稱', 'innovate72095@gmail.com', paymentMethod, orderSn)
+
       order.update({
-        sn: tradeInfo.MerchantOrderNo,
+        sn: order.sn || tradeInfo.MerchantOrderNo.slice(0, 13),
       }).then(order => {
         let orderItems = order.items.map(item => ({
           ...item.dataValues,
@@ -94,7 +96,6 @@ let orderController = {
         }))
         return res.render('payment', { order, orderItems, tradeInfo })
       })
-
     })
   },
   newebpayCallback: (req, res) => {
@@ -140,7 +141,7 @@ let orderController = {
   },
 
   clientBack: (req, res) => {
-    Order.findOne({ where: { sn: req.params.sn }, attributes: ['payment_status', 'updatedAt'] })
+    Order.findOne({ where: { sn: req.params.sn }, attributes: ['payment_status', 'updatedAt', 'id'] })
       .then(order => {
         return res.render('clientBack', { order })
       })

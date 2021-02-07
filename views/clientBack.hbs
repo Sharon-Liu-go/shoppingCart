@@ -1,7 +1,8 @@
 <div class="col-sm-3 col-md-4 mt-5 mx-auto">
 
+
   {{#ifCond order.dataValues.payment_status '===' '0'}}
-  <p class="fs-3 text"> You have not paid yet, back to payment.</p>
+  <p class="fs-3 text"> You have not paid yet, <a href="/order/{{order.dataValues.id}}/payment">back to payment.</a></p>
 
   <a href="/orders">
     <p class="fs-3 text"> Go to check your order status.</p>
@@ -9,7 +10,7 @@
 
   <p class="fs-3 text">Note: the order will be cancelled if the payment is not finished within 24 hours, please arrange
     your payment by
-    <span class="text-danger">{{time order.dataValues.updatedAt }}</span>
+    <span class="text-danger">{{time order.dataValues.updatedAt }}.</span>
   </p>
 
   {{/ifCond}}

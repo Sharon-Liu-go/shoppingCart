@@ -16,6 +16,17 @@ function getPayParam(method) {
   }
 }
 
+//取得MerchantOrderNo （訂單號碼＋一組五個數字(0-9）
+function tradeNo(orderNo) {
+  let tradeNo = ""
+  for (let i = 0; i < 5; i++) {
+    let x = Math.floor(Math.random() * 10)
+    tradeNo = tradeNo + x
+  }
+  orderNo = orderNo + tradeNo
+  return orderNo
+}
+
 function genDataChain(TradeInfo) {
   let results = [];
   for (let kv of Object.entries(TradeInfo)) {
@@ -48,10 +59,10 @@ function create_mpg_sha_encrypt(TradeInfo) {
   return sha.update(plainText).digest("hex").toUpperCase();
 }
 
-function getTradeInfo(Amt, Desc, email, paymentMethod) {
+function getTradeInfo(Amt, Desc, email, paymentMethod, orderSn) {
 
   console.log('===== getTradeInfo =====')
-  console.log(Amt, Desc, email, paymentMethod)
+  console.log(Amt, Desc, email, paymentMethod, orderSn)
   console.log('==========')
 
   data = {
@@ -59,7 +70,7 @@ function getTradeInfo(Amt, Desc, email, paymentMethod) {
     'RespondType': 'JSON', // 回傳格式
     'TimeStamp': Date.now(), // 時間戳記
     'Version': 1.5, // 串接程式版本
-    'MerchantOrderNo': Date.now(), // 商店訂單編號
+    'MerchantOrderNo': tradeNo(orderSn ? orderSn : Date.now()), // 商店訂單編號
     'LoginType': 0, // 智付通會員
     'OrderComment': 'OrderComment', // 商店備註
     'Amt': Amt, // 訂單金額

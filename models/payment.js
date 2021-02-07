@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     paid_at: DataTypes.DATE,
     params: DataTypes.TEXT,
     orderId: DataTypes.INTEGER,
+    merchantOrderNo: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Payment',
