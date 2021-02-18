@@ -18,10 +18,14 @@
         <td>NT$ {{this.amount}}</td>
         <td>{{getShippingStatus this.shipping_status}}</td>
         <td>{{getPayStatus this.payment_status}}</td>
-        <td><a class="btn btn-success bg-gradient" href="/order/{{this.id}}" role="button">Details</a>
+        <td>
+          <a class="btn btn-success bg-gradient" href="/order/{{this.id}}" role="button">Details</a>
+          {{#ifCond this.payment_status '===' '0'}}
+          <a class="btn btn-danger bg-gradient" href="/order/{{this.id}}" role="button">Pay now</a>
+          {{/ifCond}}
           {{#ifCond this.shipping_status '===' '0'}}
           <form action='/order/{{this.id}}/cancel' method="POST" style="display: inline;">
-            <button class="btn btn-warning align-middle" type="submit">Cancel</button>
+            <button class="btn btn-warning align-middle bg-gradient" type="submit">Cancel</button>
           </form>
           {{/ifCond}}
         </td>

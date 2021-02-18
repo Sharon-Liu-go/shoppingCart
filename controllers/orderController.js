@@ -128,8 +128,12 @@ let orderController = {
   },
 
   getOrder: (req, res) => {
+    return Order.findByPk(req.params.id, { include: 'items' }).then(order => {
+      let paymentMethod = newebpay_helpers.getPayParam(order.dataValues.payment_method)
 
-    Order.findByPk(req.params.id, { include: 'items' }).then(order => {
+      let orderSn = order.sn
+      const tradeInfo = newebpay_helpers.getTradeInfo(order.amount, '產品名稱', 'innovate72095@gmail.com', paymentMethod, orderSn)
+
       let orderItems = order.items.map(item => ({
         ...item.dataValues,
         price: item.OrderItem.price,
@@ -137,7 +141,7 @@ let orderController = {
         subtotal: item.OrderItem.price * item.OrderItem.quantity
 
       }))
-      return res.render('orderDetails', { order, orderItems })
+      return res.render('orderDetails', { order, orderItems, tradeInfo })
     })
   },
 
