@@ -146,7 +146,8 @@
         <div class="mb-3 row">
           <label for="staticConsignee" class="col-sm-4 col-form-label">Shipping status :</label>
           <div class="col-sm-6">
-            <input type="text" readonly class="form-control-plaintext" id="staticConsignee" value="Processing">
+            <input type="text" readonly class="form-control-plaintext" id="staticConsignee"
+              value="{{getShippingStatus order.dataValues.shipping_status}}">
           </div>
         </div>
         <div class="mb-3 row">
@@ -172,7 +173,8 @@
         <div class="mb-3 row">
           <label for="staticConsignee" class="col-sm-4 col-form-label">Payment status :</label>
           <div class="col-sm-6">
-            <input type="text" readonly class="form-control-plaintext" id="staticConsignee" value="Paid">
+            <input type="text" readonly class="form-control-plaintext" id="staticConsignee" value={{getPayStatus
+              order.dataValues.payment_status}}>
           </div>
         </div>
       </div>
@@ -182,11 +184,13 @@
     <div class="row">
       <div class="col-sm-12 col-md-4 p-3">
         <div class="">
+          {{#ifCond order.dataValues.shipping_status '===' "0" }}
           <form action='/order/{{order.dataValues.id}}/cancel' method="POST">
             <button class="btn btn-warning align-middle" type="submit"
               style="height: 3em; font-size:1.2em; width:100%">Cancel
               Order</button>
           </form>
+          {{/ifCond}}
         </div>
       </div>
       <div class="col-sm-12 col-md-4 p-3"> </div>

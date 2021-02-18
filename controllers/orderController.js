@@ -68,9 +68,10 @@ let orderController = {
       order.update({
         ...req.body,
         shipping_status: '-1',
-        payment_status: '-1',
+        payment_status: order.payment_status === '0' ? '-1' : '2',
       }).then(order => {
-        return res.redirect('back')
+        req.flash('success_message', 'Order successfully canceled')
+        return res.redirect('/orders')
       })
     })
   },

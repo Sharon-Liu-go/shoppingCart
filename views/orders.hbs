@@ -19,6 +19,11 @@
         <td>{{getShippingStatus this.shipping_status}}</td>
         <td>{{getPayStatus this.payment_status}}</td>
         <td><a class="btn btn-success bg-gradient" href="/order/{{this.id}}" role="button">Details</a>
+          {{#ifCond this.shipping_status '===' '0'}}
+          <form action='/order/{{this.id}}/cancel' method="POST" style="display: inline;">
+            <button class="btn btn-warning align-middle" type="submit">Cancel</button>
+          </form>
+          {{/ifCond}}
         </td>
       </tr>
       {{/each}}

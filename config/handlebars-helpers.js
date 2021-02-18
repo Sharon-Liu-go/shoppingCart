@@ -40,7 +40,7 @@ module.exports = {
 
   getShippingStatus(shipping_status_no) {
     switch (shipping_status_no) {
-      case '-1': return 'Cancelled'
+      case '-1': return 'Canceled'
       case '0': return 'Processing'
       case '1': return 'Dispatched'
       case '2': return 'Delivered'
@@ -49,9 +49,11 @@ module.exports = {
 
   getPayStatus(payment_status_no) {
     switch (payment_status_no) {
-      case '-1': return 'Cancelled'
+      case '-1': return 'Canceled'
       case '0': return 'Unpaid'
       case '1': return 'Paid'
+      case '2': return 'Pending Refund'
+      case '3': return 'Refunded'
     }
   },
 
