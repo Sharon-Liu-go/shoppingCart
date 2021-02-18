@@ -78,7 +78,11 @@ function getTradeInfo(Amt, Desc, email, paymentMethod, orderSn) {
     'Email': email, // 付款人電子信箱
     'ReturnURL': ReturnURL, // 支付完成返回商店網址
     'NotifyURL': NotifyURL, // 支付通知網址/每期授權結果通知
+<<<<<<< HEAD
     'ClientBackURL': `${ClientBackURL}/${orderSn ? orderSn : Date.now()}`, // 支付取消返回商店網址
+=======
+    'ClientBackURL': `${ClientBackURL}/${tradeNo(orderSn ? orderSn : Date.now())}`, // 支付取消返回商店網址
+>>>>>>> 831cdfeca5c9e9bea7277b000a1601c615480d58
   }
   //加入paymentMethod的參數，啟用:1
 
