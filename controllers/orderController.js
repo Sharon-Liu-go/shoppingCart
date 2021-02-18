@@ -113,7 +113,7 @@ let orderController = {
     console.log('===== spgatewayCallback: create_mpg_aes_decrypt、data =====')
     console.log(data)
 
-    return Order.findAll({ where: { sn: data.Result.MerchantOrderNo } }).then(orders => {
+    return Order.findAll({ where: { sn: data.Result.MerchantOrderNo.slice(0, 13) } }).then(orders => {
       console.log(`==========`)
       console.log(data.Result.MerchantOrderNo)
       console.log(orders)
@@ -121,7 +121,7 @@ let orderController = {
         ...req.body,
         payment_status: 1,
       }).then(order => {
-        return res.redirect('/orders')
+        return res.redirect(`/clientBack/${order.sn}`)
       })
     })
   },
