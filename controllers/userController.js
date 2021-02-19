@@ -69,20 +69,36 @@ let userController = {
     const id = req.params.id
     const { oldPassword, newPassword, newPasswordConfirm } = req.body
     User.findByPk(id, { attributes: ['id', 'password'] }).then(user => {
+
+      let msgArray = []
       if (!bcrypt.compareSync(oldPassword, user.dataValues.password)) {
-        req.flash('error_message', 'Origin password is incorrect')
-        return res.redirect(`/passwordSetting/${id}`)
+        msgArray.push({ message: 'Origin password is incorrect' })
       }
 
       if (newPassword !== newPasswordConfirm) {
-        req.flash('error_message', 'new password and new password confirmation are different')
-        return res.redirect(`/passwordSetting/${id}`)
+        msgArray.push({ message: 'New password and new password confirmation are different' })
+      }
+
+      if (oldPassword === newPassword) {
+        msgArray.push({ message: 'New password and origin password are the same, please input another new password' })
+      }
+
+      if (newPassword.length < 6) {
+        msgArray.push({ message: 'Passwords must be at least 6 characters in length' })
+      }
+
+      if (newPassword.indexOf(' ') + 1) {
+        msgArray.push({ message: "Passwords can't include space" })
+      }
+
+      if (msgArray.length > 0) {
+        return res.render('passwordSetting', { msgArray })
       }
 
       return user.update({
         password: bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10), null)
       }).then(user => {
-        req.flash('success_message', 'Successfully save change')
+        req.flash('success_message', 'Successfully reset your password')
         res.redirect(`/selfProfile/${id}`)
       })
     })
