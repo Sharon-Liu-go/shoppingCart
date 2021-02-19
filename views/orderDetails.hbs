@@ -180,7 +180,7 @@
       </div>
     </div>
   </div>
-  <div class="mx-auto px-5 bg-light ">
+  <div class="mx-auto px-5 ">
     <div class="row">
       <div class="col-sm-12 col-md-4 p-3">
         <div class="">
@@ -196,15 +196,16 @@
       <div class="col-sm-12 col-md-4 p-3"> </div>
       <div class="col-sm-12 col-md-4 p-3">
         <div class="">
+          {{#ifCond order.dataValues.payment_status '===' "0" }}
           <form name='newebpay' action='{{tradeInfo.PayGateWay}}' method="POST">
             <input type="hidden" name="MerchantID" value="{{tradeInfo.MerchantID}}">
             <input type="hidden" name="TradeInfo" value="{{tradeInfo.TradeInfo}}">
             <input type="hidden" name="TradeSha" value="{{tradeInfo.TradeSha}}">
             <input type="hidden" name="Version" value="{{tradeInfo.Version}}">
             <button class="btn btn-success align-middle" type="submit"
-              style="height: 3em; font-size:1.2em; width:100%">Confirm
-              and Pay</button>
+              style="height: 3em; font-size:1.2em; width:100%">Pay now</button>
           </form>
+          {{/ifCond}}
         </div>
       </div>
     </div>
