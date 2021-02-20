@@ -60,13 +60,13 @@ let userController = {
   },
 
   login: (req, res) => {
-    req.flash('success_message', 'Successfully login')
+    req.flash('success_message', 'Successfully logged in!')
     return res.redirect('/')
   },
 
   logout: (req, res) => {
     req.logout()
-    req.flash('success_message', 'Successfully logout')
+    req.flash('success_message', 'Successfully logged out')
     return res.redirect('/')
   },
 
@@ -103,7 +103,7 @@ let userController = {
 
     return User.findByPk(id).then(user => {
       user.update(req.body).then(user => {
-        req.flash('success_message', 'Successfully save change')
+        req.flash('success_message', 'Successfully save changes')
         res.redirect(`/selfProfile/${id}`)
       })
     })

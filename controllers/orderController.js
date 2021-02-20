@@ -70,7 +70,7 @@ let orderController = {
         shipping_status: '-1',
         payment_status: order.payment_status === '0' ? '-1' : '2',
       }).then(order => {
-        req.flash('success_message', 'Order successfully canceled')
+        req.flash('success_message', 'Order is successfully canceled')
         return res.redirect('/orders')
       })
     })
