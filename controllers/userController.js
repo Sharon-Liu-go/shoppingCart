@@ -78,7 +78,30 @@ let userController = {
 
   editSelfProfile: (req, res) => {
     const id = req.params.id
-    User.findByPk(id).then(user => {
+    const { email, phone } = req.body
+
+    let msgArray = []
+    //對email的輸入限制
+    if (email.indexOf(' ') + 1 || email.match(/.+(@).+(.co).*/) === null) {
+      msgArray.push({ message: 'The email is invalid' })
+    }
+
+    User.findOne({ where: { email: email } }).then(user => {
+      if (user) {
+        msgArray.push({ message: 'The email has already existed！' })
+      }
+    })
+
+    //對phone的輸入限制
+    if (phone.length > 0 && phone.match(/^09[0-9]{8}$/) === null) {
+      msgArray.push({ message: 'The phone number is invalid' })
+    }
+
+    if (msgArray.length > 0) {
+      return res.render('selfProfile', { msgArray })
+    }
+
+    return User.findByPk(id).then(user => {
       user.update(req.body).then(user => {
         req.flash('success_message', 'Successfully save change')
         res.redirect(`/selfProfile/${id}`)
