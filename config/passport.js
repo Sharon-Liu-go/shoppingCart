@@ -15,8 +15,8 @@ passport.use(new LocalStrategy(
   // authenticate user
   (req, email, password, cb) => {
     User.findOne({ where: { email: email } }).then(user => {
-      if (!user) return cb(null, false, req.flash('error_message', 'Wrong email or password'))
-      if (!bcrypt.compareSync(password, user.password)) return cb(null, false, req.flash('error_message', 'Wrong email or password'))
+      if (!user) return cb(null, false, req.flash('error_message_c', 'Wrong email or password'))
+      if (!bcrypt.compareSync(password, user.password)) return cb(null, false, req.flash('error_message_c', 'Wrong email or password'))
       return cb(null, user)
     })
   }
