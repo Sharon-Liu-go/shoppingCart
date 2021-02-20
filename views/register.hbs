@@ -2,12 +2,7 @@
   <h1 class="text-center">Register</h1>
   <p class="text-black-50">＊：required</p>
 
-  {{#each msgArray}}
-  <div class="alert alert-warning alert-dismissible fade show fs-5 text" role="alert">
-    {{this.message}}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {{/each}}
+  {{>message}}
 
   <div class="mb-3">
     <form action='/register' method='POST'>

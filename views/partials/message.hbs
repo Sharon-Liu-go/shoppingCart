@@ -4,3 +4,10 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {{/if}}
+
+{{#each msgArray}}
+<div class="alert alert-warning alert-dismissible fade show fs-5 text" role="alert">
+  {{this.message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/each}}
