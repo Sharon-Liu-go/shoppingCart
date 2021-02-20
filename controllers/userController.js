@@ -9,25 +9,50 @@ let userController = {
 
   register: (req, res) => {
     const { name, email, phone, password, passwordConfirm } = req.body
-    if (password !== passwordConfirm) {
-      req.flash('error_message', 'Different passwords！')
-      return res.redirect('/register')
-    } else {
-      User.findOne({ where: { email: email } }).then(user => {
-        if (user) {
-          req.flash('error_message', 'The email has already existed！')
-          return res.redirect('/register')
-        } return User.create({
-          name: name,
-          email: email,
-          phone: phone,
-          password: bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
-        }).then(user => {
-          req.flash('success_message', 'Successfully registered')
-          res.redirect('/login')
-        })
-      })
+
+    let msgArray = []
+    //對email的輸入限制
+    if (email.indexOf(' ') + 1 || email.match(/.+(@).+(.co).*/) === null) {
+      msgArray.push({ message: 'The email is invalid' })
     }
+
+    User.findOne({ where: { email: email } }).then(user => {
+      if (user) {
+        msgArray.push({ message: 'The email has already existed！' })
+      }
+    })
+
+    //對phone的輸入限制
+    if (phone.length > 0 && phone.match(/^09[0-9]{8}$/) === null) {
+      msgArray.push({ message: 'The phone number is invalid' })
+    }
+    //對password的入限制
+    if (password.length < 6) {
+      msgArray.push({ message: 'Passwords must be at least 6 characters in length' })
+    }
+
+    if (password.indexOf(' ') + 1) {
+      msgArray.push({ message: "Passwords can't include space" })
+    }
+    if (password !== passwordConfirm) {
+      req.flash('error_message', '')
+      msgArray.push({ message: "Different passwords！" })
+    }
+
+    if (msgArray.length > 0) {
+      return res.render('register', { msgArray, name, email, phone })
+    }
+
+    return User.create({
+      name: name,
+      email: email,
+      phone: phone,
+      password: bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
+    }).then(user => {
+      req.flash('success_message', 'Successfully registered')
+      res.redirect('/login')
+    })
+
   },
 
   getLoginPage: (req, res) => {

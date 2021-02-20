@@ -1,23 +1,32 @@
 <div class="mt-5 mx-auto " style="max-width: 30%;">
   <h1 class="text-center">Register</h1>
   <p class="text-black-50">＊：required</p>
+
+  {{#each msgArray}}
+  <div class="alert alert-warning alert-dismissible fade show fs-5 text" role="alert">
+    {{this.message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {{/each}}
+
   <div class="mb-3">
     <form action='/register' method='POST'>
       <div class="mb-3 border-bottom border-secondary bg-light">
         <label for="inputName">Name <span class="text-black-50">*</span></label>
         <input type="text" name="name" class="form-control form-control-lg border-0 bg-light" placeholder="" required
-          autofocus>
+          autofocus value={{name}}>
       </div>
 
       <div class="mb-3 border-bottom border-secondary bg-light">
         <label for="inputEmail">Email <span class="text-black-50">*</span></label>
         <input type="text" name="email" class="form-control form-control-lg border-0 bg-light" placeholder="" required
-          autofocus>
+          autofocus value={{email}}>
       </div>
 
       <div class="mb-3 border-bottom border-secondary bg-light">
         <label for="inputPhone">Phone</label>
-        <input type="text" name="phone" class="form-control form-control-lg border-0 bg-light" placeholder="">
+        <input type="text" name="phone" class="form-control form-control-lg border-0 bg-light"
+          placeholder='e.g.: 0912345678' value={{phone}}>
       </div>
 
       <div class="mb-5">
@@ -26,7 +35,7 @@
           <input type="password" name="password" class="form-control form-control-lg border-0 bg-light" placeholder=""
             required autofocus>
         </div>
-        <p class="text-black-50">Passwords must be at least 6 characters in length.</p>
+        <p class="text-black-50">Passwords must be at least 6 characters in length and can't include space.</p>
       </div>
 
       <div class="mb-5 border-bottom border-secondary bg-light">
