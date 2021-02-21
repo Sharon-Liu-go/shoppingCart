@@ -18,6 +18,7 @@ Seeing all the products on the front page :<br />
  * product description <br />
  * product price <br />
  * add to cart <br />
+ * search for product name<br />
 
 **Member :** <br />
 Besides same as an visiter : <br />
