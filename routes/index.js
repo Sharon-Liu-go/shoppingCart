@@ -11,6 +11,7 @@ const userController = require('../controllers/userController.js');
 const auth = require('../middleware/auth');
 
 router.get('/', productController.getProducts)
+router.get('/search', productController.searchProduct)
 
 router.get('/cart', authenticated, cartController.getCart)
 router.post('/cart', cartController.postCart)
