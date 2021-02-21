@@ -153,9 +153,13 @@
         <div class="mb-3 row">
           <label for="staticConsignee" class="col-sm-4 col-form-label">Tracking No. :</label>
           <div class="col-sm-6">
-            <input type="text" readonly class="form-control-plaintext" id="staticConsignee" value="906560144700">
+            {{#ifCond order.dataValues.shipping_status "===" '2'}}
+            <input type="text" readonly class="form-control-plaintext" id="staticConsignee" value="906706341330">
             <a class="btn btn-success bg-gradient" style="display: inline;"
-              href="https://www.t-cat.com.tw/Inquire/TraceDetail.aspx?BillID=906560144700" role="button">Track</a>
+              href="https://www.t-cat.com.tw/Inquire/TraceDetail.aspx?BillID=906706341330" role="button">Track</a>
+            {{else}}
+            <input type="text" readonly class="form-control-plaintext" id="staticConsignee" value="">
+            {{/ifCond}}
           </div>
         </div>
       </div>
