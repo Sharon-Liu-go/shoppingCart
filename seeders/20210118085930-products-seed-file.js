@@ -5,7 +5,7 @@ const faker = require('faker')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Products',
-      Array.from({ length: 10 }).map((item, index) => ({
+      Array.from({ length: 40 }).map((item, index) => ({
         id: index + 1,
         name: faker.commerce.productName(),
         description: faker.commerce.product() + '/' + faker.commerce.productName(),
