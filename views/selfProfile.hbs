@@ -6,30 +6,30 @@
   <form action='/selfProfile/{{user.id}}' method='POST'>
 
     <div class="mb-3 row">
-      <label for="inputName" class="col-sm-2 col-form-label">Name <span class="text-black-50">*</span></label>
-      <div class="col-sm-10">
+      <label for="inputName" class="col-sm-3 col-form-label">Name <span class="text-black-50">*</span></label>
+      <div class="col-sm-9">
         <input type="text" name="name" class="form-control" id="inputName" placeholder="" value={{user.name}} required
           autofocus>
       </div>
     </div>
     <div class="mb-3 row">
-      <label for="inputEmail" class="col-sm-2 col-form-label">Email <span class="text-black-50">*</span></label>
-      <div class="col-sm-10">
+      <label for="inputEmail" class="col-sm-3 col-form-label">Email <span class="text-black-50">*</span></label>
+      <div class="col-sm-9">
         <input type="text" name="email" class="form-control" id="inputEmail" placeholder="" value={{user.email}}
           required autofocus>
       </div>
     </div>
 
     <div class="mb-3 row">
-      <label for="inputPhone" class="col-sm-2 col-form-label">Phone </label>
-      <div class="col-sm-10">
+      <label for="inputPhone" class="col-sm-3 col-form-label">Phone </label>
+      <div class="col-sm-9">
         <input type="text" name="phone" class="form-control" id="inputPhone" placeholder="" value={{user.phone}}>
       </div>
     </div>
 
     <div class="mb-3 row">
-      <label for="setNewPassword" class="col-sm-2 col-form-label">Password<span class="text-black-50">*</span></label>
-      <div class="col-sm-10 d-flex align-items-center">
+      <label for="setNewPassword" class="col-sm-3 col-form-label ">Password<span class="text-black-50">*</span></label>
+      <div class="col-sm-9 d-flex align-items-center">
         <a href="/passwordSetting/{{user.id}}" class="text-success">set new password</a>
       </div>
     </div>
