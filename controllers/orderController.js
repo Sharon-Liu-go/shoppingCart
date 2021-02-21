@@ -1,5 +1,5 @@
 const db = require('../models')
-const { Cart, CartItem, Product, Order, OrderItem } = db
+const { Cart, CartItem, Product, Order, OrderItem, User } = db
 const nodemailer = require('nodemailer');
 const newebpay_helpers = require('../config/newebpay-helpers');
 const user = require('../models/user');
@@ -84,7 +84,7 @@ let orderController = {
       let paymentMethod = newebpay_helpers.getPayParam(order.dataValues.payment_method)
 
       let orderSn = order.sn
-      const tradeInfo = newebpay_helpers.getTradeInfo(order.amount, '產品名稱', 'innovate72095@gmail.com', paymentMethod, orderSn)
+      const tradeInfo = newebpay_helpers.getTradeInfo(order.amount, '產品名稱', req.user.email, paymentMethod, orderSn)
 
       order.update({
         sn: order.sn || tradeInfo.MerchantOrderNo.slice(0, 13),
@@ -129,10 +129,12 @@ let orderController = {
 
   getOrder: (req, res) => {
     return Order.findByPk(req.params.id, { include: 'items' }).then(order => {
+
       let paymentMethod = newebpay_helpers.getPayParam(order.dataValues.payment_method)
 
       let orderSn = order.sn
-      const tradeInfo = newebpay_helpers.getTradeInfo(order.amount, '產品名稱', 'innovate72095@gmail.com', paymentMethod, orderSn)
+
+      const tradeInfo = newebpay_helpers.getTradeInfo(order.amount, '產品名稱', req.user.email, paymentMethod, orderSn)
 
       let orderItems = order.items.map(item => ({
         ...item.dataValues,
@@ -142,6 +144,8 @@ let orderController = {
 
       }))
       return res.render('orderDetails', { order, orderItems, tradeInfo })
+
+
     })
   },
 
