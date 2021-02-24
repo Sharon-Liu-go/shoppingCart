@@ -75,8 +75,6 @@ let orderController = {
   },
   getPayment: (req, res) => {
     console.log('===== getPayment =====')
-    console.log(req.params.id)
-    console.log('==========')
 
     return Order.findByPk(req.params.id, { include: 'items' }).then(order => {
       let paymentMethod = newebpay_helpers.getPayParam(order.dataValues.payment_method)

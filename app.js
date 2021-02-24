@@ -42,7 +42,7 @@ app.use(methodOverride('_method'))
 app.use(session({
   secret: 'cart',
   name: 'cart',
-  cookie: { maxAge: 80000 },
+  cookie: { maxAge: 86400000 },
   resave: false,
   saveUninitialized: true,
 }));
